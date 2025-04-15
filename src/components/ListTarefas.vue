@@ -39,7 +39,7 @@ export default {
   methods: {
     async fetchTarefas() {
       try {
-        const apiUrl = process.env.VUE_APP_API_URL || "http://177.44.248.53:3000";
+        const apiUrl = process.env.VUE_APP_API_URL || "http://192.168.1.119:3000";
         const response = await fetch(`${apiUrl}/tarefas`);
         this.tarefas = await response.json();
       } catch (error) {
