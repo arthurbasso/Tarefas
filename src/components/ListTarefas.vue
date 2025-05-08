@@ -137,33 +137,41 @@ export default {
       }
     },
     async criarTarefa() {
+      if (!this.novaTarefa.descricao || !this.novaTarefa.data_prevista) {
+        alert('Descrição e data prevista são obrigatórias');
+        return;
+      }
+
+      const usuarioId = localStorage.getItem('usuarioId');
+      if (!usuarioId) {
+        alert('Usuário não autenticado');
+        return;
+      }
+
+      const tarefa = {
+        descricao: this.novaTarefa.descricao,
+        data_prevista: this.novaTarefa.data_prevista,
+        idUsuario: usuarioId,
+      };
+
       try {
         const apiUrl = process.env.VUE_APP_API_URL || "http://localhost:3000";
-        const dataPrevista = this.novaTarefa.data_prevista || null;
-        const user = JSON.parse(localStorage.getItem('user'));
-
-        const tarefa = {
-          ...this.novaTarefa,
-          data_criacao: new Date().toISOString().split('T')[0],
-          data_prevista: dataPrevista,
-          data_encerramento: "Não encerrada",
-          idUsuario: user.id,
-        };
-
-        const response = await fetch(`${apiUrl}/tarefas`, {
+        const res = await fetch(`${apiUrl}/tarefas`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(tarefa),
         });
 
-        if (response.ok) {
+        if (res.ok) {
           this.novaTarefa = { descricao: '', data_prevista: '', situacao: 'Em Andamento' };
           this.fetchTarefas();
         } else {
-          console.error('Erro ao criar tarefa');
+          const erro = await res.json();
+          alert('Erro ao criar tarefa: ' + erro.error);
         }
       } catch (error) {
-        console.error("Erro ao criar tarefa:", error);
+        console.error('Erro ao criar tarefa:', error);
+        alert('Erro ao criar tarefa');
       }
     },
     async marcarComoConcluida(tarefa) {

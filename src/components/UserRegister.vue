@@ -1,36 +1,41 @@
 <template>
-    <div class="register">
-      <h2>Criação de Conta</h2>
-      <input v-model="nome" placeholder="Nome" />
-      <input v-model="email" placeholder="Email" />
-      <input v-model="senha" type="password" placeholder="Senha" />
-      <button @click="registrar">Registrar</button>
-      <p>Já tem conta? <router-link to="/login">Entrar</router-link></p>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return { nome: '', email: '', senha: '' };
-    },
-    methods: {
-      async registrar() {
-        const res = await fetch('http://localhost:3000/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nome: this.nome, email: this.email, senha: this.senha }),
-        });
-        if (res.ok) {
-          alert('Conta criada! Faça login.');
-          this.$router.push('/login');
-        } else {
-          alert('Erro ao registrar');
-        }
+  <div class="register">
+    <h2>Criação de Conta</h2>
+    <input v-model="nome" placeholder="Nome" />
+    <input v-model="email" placeholder="Email" />
+    <input v-model="senha" type="password" placeholder="Senha" />
+    <button @click="registrar">Registrar</button>
+    <p>Já tem conta? <router-link to="/login">Entrar</router-link></p>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return { nome: '', email: '', senha: '' };
+  },
+  methods: {
+    async registrar() {
+      if (!this.nome || !this.email || !this.senha) {
+        alert('Todos os campos são obrigatórios');
+        return;
+      }
+
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome: this.nome, email: this.email, senha: this.senha }),
+      });
+      if (res.ok) {
+        alert('Conta criada! Faça login.');
+        this.$router.push('/login');
+      } else {
+        alert('Erro ao registrar');
       }
     }
-  };
-</script>  
+  }
+};
+</script> 
 <style>
 .login, .register {
   max-width: 400px;

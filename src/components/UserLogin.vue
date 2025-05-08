@@ -1,37 +1,42 @@
 <template>
-    <div class="login">
-      <h2>Login</h2>
-      <input v-model="email" placeholder="Email" />
-      <input v-model="senha" type="password" placeholder="Senha" />
-      <button @click="login">Entrar</button>
-      <p>Não tem conta? <router-link to="/register">Crie aqui</router-link></p>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return { email: '', senha: '' };
-    },
-    methods: {
-      async login() {
-        const res = await fetch('http://localhost:3000/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: this.email, senha: this.senha }),
-        });
-        const user = await res.json();
-        if (res.ok) {
-          localStorage.setItem('user', JSON.stringify(user));
-          localStorage.setItem('usuarioId', user.id);
-          this.$router.push('/listaTarefas');
-        } else {
-          alert('Login falhou!');
-        }
+  <div class="login">
+    <h2>Login</h2>
+    <input v-model="email" placeholder="Email" />
+    <input v-model="senha" type="password" placeholder="Senha" />
+    <button @click="login">Entrar</button>
+    <p>Não tem conta? <router-link to="/register">Crie aqui</router-link></p>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return { email: '', senha: '' };
+  },
+  methods: {
+    async login() {
+      if (!this.email || !this.senha) {
+        alert('Email e senha são obrigatórios');
+        return;
+      }
+
+      const res = await fetch(`${process.env.VUE_APP_API_URL}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: this.email, senha: this.senha }),
+      });
+      const user = await res.json();
+      if (res.ok) {
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('usuarioId', user.id);
+        this.$router.push('/listaTarefas');
+      } else {
+        alert('Login falhou!');
       }
     }
-  };
-</script>  
+  }
+};
+</script> 
 <style>
 .login, .register {
   max-width: 400px;
