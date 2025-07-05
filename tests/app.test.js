@@ -4,6 +4,15 @@ const createApp = require('../app');
 
 jest.mock('nodemailer');
 
+const nodemailer = require('nodemailer');
+
+nodemailer.createTransport.mockReturnValue({
+  sendMail: jest.fn((mailOptions, callback) => {
+    callback(null, { response: 'Email enviado com sucesso' });
+  }),
+});
+
+
 let db;
 let app;
 
