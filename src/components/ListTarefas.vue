@@ -127,7 +127,7 @@ export default {
     },
     async fetchTarefas() {
       try {
-        const apiUrl = process.env.VUE_APP_API_URL || "http://localhost:3000";
+        const apiUrl = process.env.VUE_APP_API_URL;
         const response = await fetch(`${apiUrl}/tarefas`);
         const todasTarefas = await response.json();
         const usuarioId = localStorage.getItem('usuarioId');
@@ -155,7 +155,7 @@ export default {
       };
 
       try {
-        const apiUrl = process.env.VUE_APP_API_URL || "http://localhost:3000";
+        const apiUrl = process.env.VUE_APP_API_URL;
         const res = await fetch(`${apiUrl}/tarefas`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -176,7 +176,7 @@ export default {
     },
     async marcarComoConcluida(tarefa) {
       try {
-        const apiUrl = process.env.VUE_APP_API_URL || "http://localhost:3000";
+        const apiUrl = process.env.VUE_APP_API_URL;
         const atualizada = {
           ...tarefa,
           situacao: 'Concluída',
@@ -194,7 +194,7 @@ export default {
     },
     async cancelarTarefa(tarefa) {
       try {
-        const apiUrl = process.env.VUE_APP_API_URL || "http://localhost:3000";
+        const apiUrl = process.env.VUE_APP_API_URL;
         const atualizada = {
           ...tarefa,
           situacao: 'Cancelada',
