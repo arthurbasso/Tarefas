@@ -102,7 +102,7 @@ module.exports = (db = new sqlite3.Database('./database.db')) => {
 
           transporter.sendMail(mailOptions, (error, info) => {
             if (error) console.log('Erro ao enviar e-mail: ', error);
-            else console.log('E-mail enviado: ' + info.response);
+            //else console.log('E-mail enviado: ' + info.response);
           });
 
           res.status(201).json(row);
