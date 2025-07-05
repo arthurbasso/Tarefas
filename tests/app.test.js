@@ -2,6 +2,8 @@ const sqlite3 = require('sqlite3').verbose();
 const request = require('supertest');
 const createApp = require('../app');
 
+jest.mock('nodemailer');
+
 let db;
 let app;
 
