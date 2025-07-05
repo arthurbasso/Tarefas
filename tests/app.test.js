@@ -5,6 +5,7 @@ const createApp = require('../app');
 let db;
 let app;
 
+
 beforeAll((done) => {
   db = new sqlite3.Database(':memory:');
   app = createApp(db);
@@ -185,4 +186,10 @@ describe('API Tests', () => {
     const res = await request(app).put('/tarefas/1').send({});
     expect(res.statusCode).toBe(400);
   });
+
+  afterAll(() => {
+    jest.useRealTimers();
+    jest.clearAllTimers();
+  });
+  
 });
