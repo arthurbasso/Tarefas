@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS nova_tabela_teste2 (
+CREATE TABLE IF NOT EXISTS nova_tabela_teste3 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL
 );
