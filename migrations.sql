@@ -1,7 +1,6 @@
 DROP TABLE IF EXISTS nova_tabela_teste;
 
-/*CREATE TABLE IF NOT EXISTS nova_tabela_teste (
+CREATE TABLE IF NOT EXISTS nova_tabela_teste7 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL
 );
-*/
