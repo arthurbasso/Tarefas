@@ -1,5 +1,4 @@
-DROP TABLE IF EXISTS nova_tabela_teste7;
-DROP TABLE IF EXISTS nova_tabela_teste9;
+DROP TABLE IF EXISTS nova_tabela_teste;
 
 
 CREATE TABLE IF NOT EXISTS nova_tabela_teste (
