@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="header">
-      <h2>Lista de tarefas</h2>
+      <h2>Lista de tarefas 2</h2>
       <button @click="logout" class="logout-btn">Logout</button>
       <button @click="exportarPDF" class="export-btn">Exportar PDF</button>
     </div>
