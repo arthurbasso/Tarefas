@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS categoria_nova;
+DROP TABLE IF EXISTS categoria;
 
-CREATE TABLE IF NOT EXISTS categoria (
+/*CREATE TABLE IF NOT EXISTS categoria (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL
-);
+);*/
